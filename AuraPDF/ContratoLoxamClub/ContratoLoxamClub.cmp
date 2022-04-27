@@ -1,0 +1,81 @@
+<aura:component implements="force:appHostable" access="global" controller="ContratoLoxamClubController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="listTermoContrato" type="List" />
+    <aura:attribute name="listAccount" type="List" />
+
+    <aura:attribute name="component" type="Boolean" default="true"/>
+    <aura:attribute name="termoContrato" type="Boolean" default="false"/>
+    <aura:attribute name="contratoAceito" type="Boolean"/>
+    <aura:attribute name="exceptionConstrucaoCivil" type="Boolean" default="false"/>
+    <aura:attribute name="exceptionParticipanteLoxamClub" type="Boolean" default="false"/>
+    <aura:attribute name="exceptionAccountNaoEncontrada" type="Boolean" default="false"/>
+    <aura:attribute name="loading" type="Boolean" default="false"/>
+    
+	<ltng:require scripts="https://mozilla.github.io/pdf.js/build/pdf.js" />
+    
+    <aura:if isTrue="{!v.component}">
+      <div class="contrato">
+          <aura:if isTrue="{!v.loading}">
+              <lightning:spinner />
+          </aura:if>
+
+          <aura:if isTrue="{!v.exceptionConstrucaoCivil}">
+            <c:ExceptionContratoLoxamClub naoConstrucaoCivil="true"/>
+          </aura:if>
+          <aura:if isTrue="{!v.exceptionParticipanteLoxamClub}">
+            <c:ExceptionContratoLoxamClub loxamClub="true"/>
+          </aura:if>
+          <aura:if isTrue="{!v.exceptionAccountNaoEncontrada}">
+            <c:ExceptionContratoLoxamClub contaNaoEncontrada="true"/>
+          </aura:if>
+
+          <aura:if isTrue="{!v.termoContrato}">
+            <lightning:card class="contrato-escopo">
+                
+                <div class="contrato-titulo">Regras Loxam Club</div>
+                <lightning:card class="contrato-body">
+                    <!-- <c:ContratoLoxamClubPDF pdf="{!$Resource.ContratoLoxamClubPDF}" versionId="1"/> -->
+                    <div class="contrato-pdf">
+                    	<iframe src="{!$Resource.ContratoLoxamClubPDF}" allowfullscreen="true" width="800" height="780" style="border: none;"></iframe> 
+                    </div>
+                    <!-- <aura:iteration items="{!v.listTermoContrato}" var="termoContrato">
+                        {!termoContrato}
+                    </aura:iteration> -->
+                </lightning:card>
+                
+                <div class="contrato-aceitar" >
+                    <lightning:input type="checkbox" onclick="{!c.aceitarContrato}"/> <div style="margin:10px">  Declaro que li as cláusulas acima do termo de aceite para o Loxam Club, estando ciente de sua existência e desejo fazer parte do Loxam Club, bem como aceito a política de privacidade e tratamento de dados da Loxam Degraus.</div> 
+                </div>                
+            </lightning:card>
+          </aura:if>
+
+          <aura:if isTrue="{!v.contratoAceito}">
+            <lightning:card class="contrato-finish">
+              <div class="contrato-finish-texto">
+                <p>Parabéns! Agora você está participando do Programa Loxam Club!</p>
+                <p>Atenção, verifique no seu e-mail cadastrado um presente de boas vindas que você recebeu. <lightning:icon iconName="action:share_thanks" size="small" alternativeText="Indicates approval" /></p>
+                <center>
+                  <div class="icon-email">
+                      <lightning:icon style="width: 100px;" iconName="utility:email" size="large" alternativeText="Indicates approval" />
+                  </div>
+                </center>
+
+                <p>Atenciosamente,</p>
+                <p>Loxam Degraus</p>
+              </div>
+                <div class="contrato-finish-logo">
+                    <img style="max-width: 100%;
+                                width: 200px;
+                                margin: 0 auto;
+                                display: block;"
+                    src="data:image/png;base64,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" />
+                </div>
+            </lightning:card >
+          </aura:if>
+
+        </div>
+    </aura:if>  
+    
+</aura:component>

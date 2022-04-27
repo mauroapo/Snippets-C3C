@@ -1,0 +1,22 @@
+<aura:component access="global">
+	 <aura:attribute name="pdf" type="String" />
+    <aura:attribute name="versionId" type="String" access="public"/>
+    <aura:attribute name="loaded" type="Boolean" default="false"/>
+    <aura:attribute name="fired" type="Boolean" default="false"/>
+   <!-- <aura:dependency resource="c:PDFLoaded" type="EVENT" />
+    <aura:registerEvent name="pdfLoaded" type="c:PDFLoaded" /> -->
+    
+
+    <div class="{!v.loaded ? '' : 'slds-hide'}">
+        <button class="slds-button slds-button--brand slds-float--left slds-m-left--large" id="{!v.versionId + 'prev'}">Voltar</button>
+        <button class="slds-button slds-button--brand slds-float--right slds-m-right--large" id="{!v.versionId + 'next'}">Avançar</button>
+        <br></br>
+        <span>Página: <span id="{!v.versionId + 'page_num'}"></span> / <span id="{!v.versionId + 'page_count'}"></span></span>
+    </div>
+
+    <!--<div class="{!v.loaded ? 'slds-hide' : ''}">
+        Carregando PDF...
+    </div> -->
+
+    <canvas id="{!v.versionId + 'the-canvas'}"></canvas>
+</aura:component>

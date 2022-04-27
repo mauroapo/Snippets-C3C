@@ -1,0 +1,93 @@
+.THIS.contrato {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 90vh;
+}
+.THIS .contrato-welcome {
+  font-size: 20px;
+  text-align: center;
+}
+.THIS .contrato-welcome-logo  {
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.THIS .contrato-escopo {
+  width: 900px;
+  /* border: solid 4px; */
+  /* border-color: white; */
+  padding: 10px;
+}
+.THIS .contrato-titulo {
+  display: block;
+  margin: 0 auto;
+  font-size: 30px;
+  font-family: initial;
+}
+
+
+.THIS .contrato-body {
+  background-color: white;
+  color: black;
+  height: 200px;
+  overflow-y: scroll;
+  width: auto;
+  /* border:groove !important; */
+  padding: 0 56px;
+  /* border: solid; */
+  /* border-color: white; */
+  height: 500px;
+  font-size: 18px;
+}
+
+.THIS .contrato-aceitar {
+  display: block;
+  background-color: #777575;
+  color: white;
+  font-size: 16px;
+  font-family: inherit;
+  display: flex; 
+  align-items: baseline;
+  padding: 18px;
+  margin: 20px!important;
+}
+
+.THIS .contrato-welcome {
+  display: block;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.THIS .contrato-finish {
+  display: block;
+  padding: 20px;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+.THIS .contrato-finish-texto {
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 20px;
+
+}
+.THIS .contrato-finish-logo {
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.THIS .contrato-pdf
+{
+    justify-content: center;
+    display: flex;
+}
