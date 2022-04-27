@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable" access="global" controller="ContratoLoxamClubController">
+    <!-- Caso queira spinner com carregamento descomentar código abaixo-->
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    <!-- Caso queira spinner com carregamento descomentar código acima-->
+
+
+    <aura:attribute name="component" type="Boolean" default="true"/>
+    <aura:attribute name="loading" type="Boolean" default="false"/>
+    
+	<ltng:require scripts="https://mozilla.github.io/pdf.js/build/pdf.js" />
+    
+    <aura:if isTrue="{!v.component}">
+      <div class="contrato">
+          <!-- Caso queira spinner com carregamento descomentar código abaixo-->
+          <!-- <aura:if isTrue="{!v.loading}">
+              <lightning:spinner />
+          </aura:if> -->
+          <!-- Caso queira spinner com carregamento descomentar código acima-->
+
+          <aura:if isTrue="{!v.termoContrato}">
+            <lightning:card class="contrato-escopo">
+                
+                <div class="contrato-titulo">PDF</div>
+                <lightning:card class="contrato-body">
+                    <c:ContratoLoxamClubPDF pdf="{!$Resource.ContratoLoxamClubPDF}" versionId="1"/>
+                    <div class="contrato-pdf">
+                    	<iframe src="{!$Resource.ContratoLoxamClubPDF}" allowfullscreen="true" width="800" height="780" style="border: none;"></iframe> 
+                    </div>
+                    <!-- <aura:iteration items="{!v.listTermoContrato}" var="termoContrato">
+                        {!termoContrato}
+                    </aura:iteration> -->
+                </lightning:card>
+                
+            </lightning:card>
+          </aura:if>
+
+      </div>
+    </aura:if>  
+    
+</aura:component>
