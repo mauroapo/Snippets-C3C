@@ -2,6 +2,8 @@
 
 Snippets para ajudar na hora de desenvolver classe de testes unitários
 
+## Como instalar:
+
 ## Conteúdos:
 ## 1. Setup
 > Snippet para criar o setupInjector com maior velocidade.
